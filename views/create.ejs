@@ -2,19 +2,123 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
+  <div class = "create-container">
+    <div class = "nav">
+      <%- include("./partials/nav.ejs") %>
+    </div>
+    
 
-  <div class="create-blog content">
-    <form action="/blogs" method="POST">
-      <label for="title">Blog title:</label>
-      <input type="text" id="title" name="title" required>
-      <label for="snippet">Blog snippet:</label>
-      <input type="text" id="snippet" name="snippet" required>
-      <label for="body">Blog body:</label>
-      <textarea id="body" name="body" required></textarea>
-      <button>Submit</button>
-    </form>
-  </div>
+    <div class = "content">
+      <h1 class = "heading-2">New Session</h1>
+      <div class=  "red-question">
+        <h1>Render Predictions?</h1>
+        <button class = "pred" id = "no">No</button>
+        <button class = "pred" id = "yes">Yes</button>
+
+      </div>
+      <div class = "video-conversion">
+        <h1 id = "loading">Loading...</h1>
+        <audio id = "audio" src = "audio.mp3">
+        </audio>
+        <video id = "video"></video>
+        <h1 id = "rend-predictions"></h1>
+        <canvas id = "canvas"></canvas>
+      </div>
+
+      <form action="/blogs" method="POST">
+        <div class = "question">
+          <label for="title" >Date: </label>
+          <input type="text" id="title" class = "date" name="title" placeholder = "Ex. 1/20/2020" required>
+
+        </div>
+        <div class = "question">
+          <label for="snippet">Your stress levels:</label>
+          <input type="text" id="snippet" name="snippet" placeholder = "Very anxious and nervous for chem test." required>
+        </div>
+        <div class = "question">
+          <label for="body">Count of "Bad Habits" being shown 
+            (i.e. biting nails, scratching head/skin) </label>
+          <textarea id="body" name="body" required></textarea>
+        </div>
+        <button>Submit</button>
+      </form>
+
+      
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"> </script>
+
+    <script>
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+
+      const modelParams = {
+          flipHorizontal: false,   // flip e.g for video 
+          imageScaleFactor: 0.5,  // reduce input image size for gains in speed.
+          maxNumBoxes: 2,        // maximum number of boxes to detect
+          iouThreshold: 0.5,      // ioU threshold for non-max suppression
+          scoreThreshold: 0.80,    // confidence threshold for predictions.
+        }
+        
+      // Select everythin in html
+      const video = document.querySelector('#video');
+      const audio = document.querySelector('#audio');
+      const canvas = document.querySelector('#canvas');
+      const body = document.querySelector('#body');
+      const no = document.querySelector('#no');
+      const yes = document.querySelector('#yes');
+      const context=  canvas.getContext('2d');
+      let model;
+      let count = 0;
+      let bool = false;
+        
+      no.addEventListener("click", ()=> {
+        bool = false;
+      })
+
+      yes.addEventListener("click", ()=> {
+        bool = true;
+      })
+
+      body.innerHTML = count;
+      handTrack.startVideo(video)
+          .then(status => {
+              if (status){
+                document.getElementById("loading").innerHTML = "Successfully loaded!"
+                document.getElementById("loading").style.color = "green";
+                  navigator.getUserMedia({video:{}}, stream => {
+                      video.srcObject = stream;
+                      setInterval(runDetection, 1000);
+                  }, 
+                  err => console.log(err)
+                  );
+              }
+          });
+
+          function runDetection(){
+              model.detect(video)
+                  .then(predictions => {
+                    console.log(predictions);
+                      if(predictions.length > 0){
+                          console.log("audio" + audio);
+                          // audio.play();
+                          count++;
+                          body.innerHTML = count;
+                      }
+                      // requestAnimationFrame(runDetection);
+                      if(bool){
+                        document.getElementById("rend-predictions").innerHTML = "Rendered Predictions"
+                        model.renderPredictions(predictions, canvas, context, video);
+                      
+                      }
+                         
+              });
+          }
+
+          handTrack.load(modelParams).then(lmodel => {
+              model = lmodel;
+          });
+    </script>
+
 
   <%- include("./partials/footer.ejs") %>
 </body>

@@ -2,24 +2,67 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
+  <div class = "container">
 
-  <div class="blogs content">
-    <h2>All Blogs</h2>
+    <div class = "nav-wrapper">
 
-    <% if (blogs.length > 0) { %>
-      <% blogs.forEach(blog => { %>
-        <a class="single" href="/blogs/<%= blog._id %>">
-          <h3 class="title"><%= blog.title %></h3>
-          <p class="snippet"><%= blog.snippet %></p>
-        </a>
-      <% }) %>
-    <% } else { %>
-      <p>There are no blogs to display...</p>
-    <% } %>
-    
-  </div>
+      <%- include("./partials/nav.ejs") %>
+    </div>
+  <div class = "hero-section">
+    <div class = "heading">
+        <h1>Stop the <span class = "dark">Stress</span>.</h1>
+        <p>Feeling stressed, pressure and anxious all the time? Are you
+            biting your nails, and itching your skin
+            24/7? Stop the stress before it reaches you. 
+        </p>
+    </div>
+    <div class = "hero-img">
+        <img src = "HealthyLifestyle.svg">
+    </div>
+</div>
 
-  <%- include("./partials/footer.ejs") %>
+</div>
+
+<div id = "section2" class = "section-2">
+<div class = "text">
+    <div class = "about">
+        <div class = "about-inner">
+            <h1>What is HabitTracker?</h1>
+
+            <p>Habit tracker is a way for you to stop all the bad habits
+                you exhibit before they get worse. 75% of Americans exhibit 
+                stress-induced symptoms, and this can be your way to stop that. 
+            </p>
+
+        </div>
+    </div>
+</div>
+<div class = "text-img">
+    <img src = "undraw_healthy_options_sdo3.svg">
+</div>
+</div>
+
+<div class = "using-website">
+<div class = "part">
+    <img class = "using-img" src = "heart.svg">
+    <p>First, go to the "Start Session" tab and enable your video. </p>
+</div>
+<div class = "part part-2">
+    <img class = "using-img" src = "person.svg">
+    <p>When you've completed your session, enter in your relative stress levels and the date. </p>
+</div>
+<div class = "part">
+    <img class = "using-img" src = "location.svg">
+    <p>Finally, view all of your logs in your porfolio page! </p>
+</div>
+
+</div>
+
+<div class = "questions">
+<h1>Questions? Don't be Afraid to Ask! </h1>
+</div>
+
+<%- include("./partials/footer.ejs") %>
+
 </body>
 </html>
