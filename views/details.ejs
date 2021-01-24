@@ -17,11 +17,10 @@
     <p class = "felt">How you Felt: </p>
     <p><%= blog.snippet %></p>
 
-    <div class = "del">
-      <a class="delete" data-doc="<%= blog._id %>">
-        <img src="/trashcan.svg" alt="delete icon">
-      </a>
-    </div>
+    <a class="delete" data-doc="<%= blog._id %>">
+      <img src="/trashcan.svg" alt="delete icon">
+    </a>
+    <a href = "/" class = "redirect"><i class="fas fa-arrow-left"></i> Home Page</a>
   </div>
   
 
@@ -53,18 +52,17 @@
       color.style.color = "#c4c225";
       status.style.color = "#c4c225";
       status.innerHTML += `Status: Moderate (${num})`;
-      explanation.innerHTML += "You exhibit multiple bad habits that may be due to stress and bad mental health. " + 
-      "It is encouraged that you see your doctor/require medical assistance in order" + 
-      "to ensure that your mental health is in good shape.";
+      explanation.innerHTML += "You exhibit some bad habits. Please be cautious of your actions" + "\n";
+      "when going through any stresful events in your life. "
       
     }
     else{
       color.style.color = "#32e361";
       status.style.color = "#32e361";
       status.innerHTML += `Status: Healthy (${num})`;
-      explanation.innerHTML += "You exhibit multiple bad habits that may be due to stress and bad mental health. " + 
-      "It is encouraged that you see your doctor/require medical assistance in order" + 
-      "to ensure that your mental health is in good shape.";
+      explanation.innerHTML += "You are in good shape! You have exhibited little to no bad habits on this day." + 
+      " Keep maintaining good mental health, good sleep schedules, eating and exercise routines, etc.";
+      "in order to keep yourself well maintained."
     }
 
 

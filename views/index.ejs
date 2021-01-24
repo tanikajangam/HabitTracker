@@ -2,84 +2,98 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <div class = "container">
+    <div class = "container">
 
-    <div class = "nav-wrapper">
+      <div class = "nav-wrapper">
 
-      <%- include("./partials/nav.ejs") %>
-    </div>
-  <div class = "hero-section">
-    <div class = "heading">
-        <h1>Stop the <span class = "dark">Stress</span>.</h1>
-        <p>Feeling stressed, pressure and anxious all the time? Are you
-            biting your nails, and itching your skin
-            24/7? Stop the stress before it reaches you. 
-        </p>
-    </div>
-    <div class = "hero-img">
-        <img src = "HealthyLifestyle.svg">
-    </div>
-</div>
+        <%- include("./partials/nav.ejs") %>
+      </div>
+    <div class = "hero-section">
+      <div data-aos="fade-up"  class = "heading">
+          <h1>Stop the <span class = "dark">Stress</span>.</h1>
+          <p>Feeling stressed, pressure and anxious all the time? Are you
+              biting your nails, and itching your skin
+              24/7? Stop the stress before it reaches you. 
+          </p>
+          <a href = "/blogs/create">Start Session</a>
+      </div>
+      <div class = "hero-img">
+          <img data-aos="fade-up"  src = "/HealthyLifestyle.svg">
+      </div>
+  </div>
+  </div>
 
-</div>
+  <div id = "section2" class = "section-2">
+  <div class = "text">
+      <div data-aos="fade-up"  class = "about">
+          <div class = "about-inner">
+              <h1>What is HabitTracker?</h1>
 
-<div id = "section2" class = "section-2">
-<div class = "text">
-    <div class = "about">
-        <div class = "about-inner">
-            <h1>What is HabitTracker?</h1>
+              <p>Habit tracker is a way for you to stop all the bad habits
+                  you exhibit before they get worse. 75% of Americans exhibit 
+                  stress-induced symptoms, and this can be your way to stop that. 
+              </p>
 
-            <p>Habit tracker is a way for you to stop all the bad habits
-                you exhibit before they get worse. 75% of Americans exhibit 
-                stress-induced symptoms, and this can be your way to stop that. 
-            </p>
+          </div>
+      </div>
+  </div>
+  <div data-aos="fade-up"  class = "text-img">
+      <img src = "/undraw_healthy_options_sdo3.svg">
+  </div>
+  </div>
 
-        </div>
-    </div>
-</div>
-<div class = "text-img">
-    <img src = "undraw_healthy_options_sdo3.svg">
-</div>
-</div>
+  <div class = "using-website">
+  <div class = "part" data-aos="fade-up">
+      <img class = "using-img" src = "/heart.svg">
+      <p>First, go to the "Start Session" tab and enable your video. </p>
+  </div>
+  <div class = "part part-2" data-aos="fade-up"  data-aos-delay = "300">
+      <img class = "using-img" src = "/person.svg">
+      <p>When you've completed your session, enter in your relative stress levels and the date. </p>
+  </div>
+  <div class = "part" data-aos="fade-up" data-aos-delay = "600" >
+      <img class = "using-img" src = "/location.svg">
+      <p>Finally, view all of your logs in your porfolio page! </p>
+  </div>
 
-<div class = "using-website">
-<div class = "part">
-    <img class = "using-img" src = "heart.svg">
-    <p>First, go to the "Start Session" tab and enable your video. </p>
-</div>
-<div class = "part part-2">
-    <img class = "using-img" src = "person.svg">
-    <p>When you've completed your session, enter in your relative stress levels and the date. </p>
-</div>
-<div class = "part">
-    <img class = "using-img" src = "location.svg">
-    <p>Finally, view all of your logs in your porfolio page! </p>
-</div>
+  </div>
 
-</div>
+  <div class = "questions" data-aos="fade-up" >
+  <h1>My Records</h1>
+  </div>
 
-<div class = "questions">
-<h1>My Records</h1>
-</div>
+  <div id = "profile"  data-aos="fade-up" class="content content-profile">
 
-<div id = "profile" class="content content-profile">
+    <% if (blogs.length > 0) { %>
+      <% blogs.forEach(blog => { %>
+        <a class="single" href="/blogs/<%= blog._id %>">
+          <div class = "box" data-aos="fade-up" >
+              <h3 class="title"><%= blog.title %> - <%= blog.body %></h3>
+              <p class="snippet"><%= blog.snippet %></p>
+          </div>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>You have 0 sessions.</p>
+    <% } %>
+    
+  </div>
 
-  <% if (blogs.length > 0) { %>
-    <% blogs.forEach(blog => { %>
-      <a class="single" href="/blogs/<%= blog._id %>">
-        <div class = "box">
-            <h3 class="title"><%= blog.title %> - <%= blog.body %></h3>
-            <p class="snippet"><%= blog.snippet %></p>
-        </div>
-      </a>
-    <% }) %>
-  <% } else { %>
-    <p>You have 0 sessions.</p>
-  <% } %>
-  
-</div>
+  <%- include("./partials/footer.ejs") %>
 
-<%- include("./partials/footer.ejs") %>
+  </div>
 
+  <script>
+    AOS.init({
+      offset: 120,
+      delay: 100,
+      duration: 500, 
+      easing: 'ease',
+      once: false, 
+      mirror: true,
+      anchorPlacement: 'top-bottom', 
+    });
+
+  </script>
 </body>
 </html>

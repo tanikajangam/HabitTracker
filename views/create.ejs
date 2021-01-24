@@ -32,7 +32,7 @@
       </div>
 
       <form action="/blogs" method="POST">
-        <div class = "question">
+        <div class = "question" data-aos = "fade-up">
           <label for="title" >Date: </label>
           <input type="text" id="title" class = "date" name="title" placeholder = "Ex. 1/20/2020" required>
 
@@ -81,6 +81,16 @@
       let count = 0;
       let bool = false;
 
+      AOS.init({
+      offset: 120,
+      delay: 100,
+      duration: 500, 
+      easing: 'ease',
+      once: false, 
+      mirror: true,
+      anchorPlacement: 'top-bottom',
+
+    });
       output.innerHTML = slider.value;
 
       slider.oninput = function() {
