@@ -7,20 +7,28 @@
       <%- include("./partials/nav.ejs") %>
     </div>
   <div class = "results">
-    <h1 class = "results-heading">Results of <span class = "darken"><%= blog.title %></span>: <span id = "color"><%= blog.body %></span></h1>
+    <div class  = "results-inner">
+      <h1 class = "results-heading">Results of <span class = "darken"><%= blog.title %></span>: <span id = "color"><%= blog.body %></span></h1>
     
-    <h2 id = "status"></h2>
-    <hr>
-    <p id = "status-explanation"></p>
+      <h2 id = "status"></h2>
+      <hr>
+      <p id = "status-explanation"></p>
+  
+      <br>
+      <p class = "felt">How you Felt: </p>
+      <p><%= blog.snippet %></p>
+    </div>
 
-    <br>
-    <p class = "felt">How you Felt: </p>
-    <p><%= blog.snippet %></p>
 
-    <a class="delete" data-doc="<%= blog._id %>">
-      <img src="/trashcan.svg" alt="delete icon">
-    </a>
-    <a href = "/" class = "redirect"><i class="fas fa-arrow-left"></i> Home Page</a>
+    <div class = "results-inner-2">
+      <a href = "/" class = "redirect"><i class="fas fa-arrow-left"></i> Home Page</a>
+      
+      <a class="delete" data-doc="<%= blog._id %>">
+        <img src="/trashcan.svg" alt="delete icon">
+      </a>
+      
+    </div>
+ 
   </div>
   
 

@@ -31,6 +31,7 @@
       margin-bottom: 1rem;
       font-size: 4rem;
   }
+
   .heading h1, 
   .heading p{
       width: 80%;
@@ -331,8 +332,45 @@
     border-radius: 20px;
     background-color: #fff;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
   }
 
+  .results-inner{
+    flex:3;
+  }
+  .results-inner-2{
+    flex:1;
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    justify-content:space-between;
+  }
+
+  .start-session{
+    text-decoration: none;
+    color: #fff;
+    text-align: left;
+    padding: .5rem 1rem;
+    border-radius: 20px;
+    margin-top: 3rem;
+    background-color: #63d3c3;
+  }
+
+  .redirect{
+    text-decoration: none;
+    color: #4E44DC;
+    left: 10%;
+    bottom: 0;
+    transition all .3s;
+  }
+
+  .redirect:hover{
+    left: 0;
+    bottom: 0;
+
+  }
   #loading{
     font-weight: 500;
     margin-top: 20px;
