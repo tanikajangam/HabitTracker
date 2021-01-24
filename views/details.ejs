@@ -2,22 +2,71 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
-
-  <div class="details content">
-    <h2><%= blog.title %></h2>
-    <div class="content">
-      <p><%= blog.body %></p>
+  <div class = "container">
+    <div class = "nav-wrapper">
+      <%- include("./partials/nav.ejs") %>
     </div>
-    <a class="delete" data-doc="<%= blog._id %>">
-      <img src="/trashcan.svg" alt="delete icon">
-    </a>
+  <div class = "results">
+    <h1 class = "results-heading">Results of <span class = "darken"><%= blog.title %></span>: <span id = "color"><%= blog.body %></span></h1>
+    
+    <h2 id = "status"></h2>
+    <hr>
+    <p id = "status-explanation"></p>
+
+    <br>
+    <p class = "felt">How you Felt: </p>
+    <p><%= blog.snippet %></p>
+
+    <div class = "del">
+      <a class="delete" data-doc="<%= blog._id %>">
+        <img src="/trashcan.svg" alt="delete icon">
+      </a>
+    </div>
   </div>
+  
 
-  <%- include("./partials/footer.ejs") %>
+</div> 
 
+<%- include("./partials/footer.ejs") %>
+
+
+  
   <script>
     const trashcan = document.querySelector('a.delete');
+    const color = document.querySelector('#color');
+    const num = parseInt(color.innerHTML, 10);
+    const status = document.querySelector('#status');
+    const explanation = document.querySelector('#status-explanation');
+    // console.log("color is " + color);
+    // console.log(typeof color);
+
+    if(num > 10){
+      color.style.color = "#e34327";
+      status.style.color = "#e34327";
+      status.innerHTML += `Status: Excessive/Unhealthy (${num})`;
+      explanation.innerHTML += "You exhibit multiple bad habits that may be due to stress and bad mental health. " + 
+      "It is encouraged that you see your doctor/require medical assistance in order" + 
+      "to ensure that your mental health is in good shape.";
+
+    }
+    else if (num > 5){
+      color.style.color = "#c4c225";
+      status.style.color = "#c4c225";
+      status.innerHTML += `Status: Moderate (${num})`;
+      explanation.innerHTML += "You exhibit multiple bad habits that may be due to stress and bad mental health. " + 
+      "It is encouraged that you see your doctor/require medical assistance in order" + 
+      "to ensure that your mental health is in good shape.";
+      
+    }
+    else{
+      color.style.color = "#32e361";
+      status.style.color = "#32e361";
+      status.innerHTML += `Status: Healthy (${num})`;
+      explanation.innerHTML += "You exhibit multiple bad habits that may be due to stress and bad mental health. " + 
+      "It is encouraged that you see your doctor/require medical assistance in order" + 
+      "to ensure that your mental health is in good shape.";
+    }
+
 
     trashcan.addEventListener('click', (e) => {
       const endpoint = `/blogs/${trashcan.dataset.doc}`;

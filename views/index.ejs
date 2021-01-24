@@ -59,7 +59,24 @@
 </div>
 
 <div class = "questions">
-<h1>Questions? Don't be Afraid to Ask! </h1>
+<h1>My Records</h1>
+</div>
+
+<div id = "profile" class="content content-profile">
+
+  <% if (blogs.length > 0) { %>
+    <% blogs.forEach(blog => { %>
+      <a class="single" href="/blogs/<%= blog._id %>">
+        <div class = "box">
+            <h3 class="title"><%= blog.title %> - <%= blog.body %></h3>
+            <p class="snippet"><%= blog.snippet %></p>
+        </div>
+      </a>
+    <% }) %>
+  <% } else { %>
+    <p>You have 0 sessions.</p>
+  <% } %>
+  
 </div>
 
 <%- include("./partials/footer.ejs") %>
