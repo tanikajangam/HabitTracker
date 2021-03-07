@@ -24,18 +24,17 @@
 
       <div class = "video-conversion">
         <h1 id = "loading">Loading...</h1>
-        <!-- <audio id = "audio" src = "audio.mp3">
-        </audio> -->
-        <!-- <video id = "video"></video>
+        <audio id = "audio" src = "audio.mp3">
+        </audio>
+        <video id = "video"></video>
         <h1 id = "rend-predictions"></h1>
-        <canvas id = "canvas"></canvas> -->
+        <canvas id = "canvas"></canvas>
       </div>
 
       <form action="/blogs" method="POST">
-        <div class = "question" data-aos = "fade-up">
+        <div class = "question">
           <label for="title" >Date: </label>
           <input type="text" id="title" class = "date" name="title" placeholder = "Ex. 1/20/2020" required>
-
         </div>
         <div class = "question">
           <label for="snippet">Your stress levels:</label>
@@ -63,7 +62,7 @@
           imageScaleFactor: 0.5,  // reduce input image size for gains in speed.
           maxNumBoxes: 2,        // maximum number of boxes to detect
           iouThreshold: 0.5,      // ioU threshold for non-max suppression
-          scoreThreshold: confidence/100.0,    // confidence threshold for predictions.
+          scoreThreshold: .8,    // confidence threshold for predictions.
         }
         
       // Select everythin in html
@@ -80,17 +79,6 @@
       let model;
       let count = 0;
       let bool = false;
-
-      AOS.init({
-      offset: 120,
-      delay: 100,
-      duration: 500, 
-      easing: 'ease',
-      once: false, 
-      mirror: true,
-      anchorPlacement: 'top-bottom',
-
-    });
       output.innerHTML = slider.value;
 
       slider.oninput = function() {
@@ -106,6 +94,7 @@
       })
 
       body.innerHTML = count;
+      
       handTrack.startVideo(video)
           .then(status => {
               if (status){
@@ -134,9 +123,8 @@
                       if(bool){
                         document.getElementById("rend-predictions").innerHTML = "Rendered Predictions"
                         model.renderPredictions(predictions, canvas, context, video);
-                      
+                        
                       }
-                         
               });
           }
 
